@@ -68,6 +68,10 @@ local function encode_table(val, stack)
 
   stack[val] = true
 
+  if next(val) == nil then
+    return '[]'
+  end
+
   local types = {}
 
   for k in pairs(val) do
