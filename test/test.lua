@@ -93,7 +93,9 @@ end)
 
 test("objects", function()
   local t = { x = 10, y = 20, z = 30 }
-  assert( equal( t, json.decode( json.encode(t) ) ) )
+  local encoded = json.encode(t)
+  assert( equal( '{"x":10,"y":20,"z":30}', encoded) )
+  assert( equal( t, json.decode( encoded ) ) )
 end)
 
 
