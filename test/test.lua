@@ -91,6 +91,19 @@ test("arrays", function()
 end)
 
 
+test("arrays with nil / null", function()
+  local t = {
+    { [1000] = "b" },
+    { nil, 2, 3, 4 },
+    { nil, "test" },
+    { [1] = "a", [3] = "b" },
+  }
+  for i, v in ipairs(t) do
+    assert( equal( v, json.decode( json.encode(v) ) ) )
+  end
+end)
+
+
 test("objects", function()
   local t = { x = 10, y = 20, z = 30 }
   assert( equal( t, json.decode( json.encode(t) ) ) )
@@ -203,11 +216,8 @@ end)
 
 test("encode invalid", function()
   local t = {
-    { [1000] = "b" },
     { [ function() end ] = 12 },
-    { nil, 2, 3, 4 },
     { x = 10, [1] = 2 },
-    { [1] = "a", [3] = "b" },
     { x = 10, [4] = 5 },
   }
   for i, v in ipairs(t) do
