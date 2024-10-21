@@ -110,6 +110,18 @@ test("objects", function()
 end)
 
 
+test("encode empty", function()
+  local t = {
+    [ '[]' ] = {},
+    [ '""' ] = "",
+  }
+  for k, v in pairs(t) do
+    local res = json.encode(v)
+    assert( equal(res, k), fmt("'%s' did not equal expected %s", res, k) )
+  end
+end)
+
+
 --test("strict decode", function()
 --  local t = {
 --    '{x : 1}',
